@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الملعب المصري | دوري المحافظات الرمضاني</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f4f4f4;
+      color: #1e2a3a;
+    }
+
+    /* شريط التنقل */
+    .navbar {
+      background-color: #0a2f1f;
+      color: white;
+      padding: 0.8rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo i {
+      color: #f5b041;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #eee;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #f5b041;
+    }
+
+    .date-badge {
+      background-color: #f5b041;
+      color: #0a2f1f;
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    /* الهيدر الرئيسي */
+    .hero {
+      background: linear-gradient(rgba(0,40,0,0.7), rgba(0,20,0,0.8)), url('https://images.pexels.com/photos/47316/stadium-football-field-soccer-47316.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+      background-size: cover;
+      background-position: center;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 5px black;
+    }
+
+    .hero-content p {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 0 auto;
+      background: rgba(0,0,0,0.5);
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+    }
+
+    /* الحاوية الرئيسية */
+    .container {
+      max-width: 1300px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    /* العناوين */
+    .section-title {
+      font-size: 2rem;
+      margin: 2rem 0 1.5rem;
+      border-right: 6px solid #f5b041;
+      padding-right: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    /* شبكة الأخبار */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .news-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .news-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .news-img {
+      height: 180px;
+      background-color: #aaa;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .news-content {
+      padding: 1.2rem;
+    }
+
+    .news-content h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: #0a2f1f;
+    }
+
+    .news-date {
+      color: #e67e22;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* جدول المباريات */
+    .matches-section {
+      background: white;
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 0 15px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
+    }
+
+    .match-day {
+      margin-bottom: 2rem;
+    }
+
+    .match-day h3 {
+      background: #0a2f1f;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .match-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 1rem;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .match-item:last-child {
+      border-bottom: none;
+    }
+
+    .teams {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      font-weight: 600;
+    }
+
+    .team {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .team i {
+      color: #f5b041;
+    }
+
+    .result {
+      background: #0a2f1f;
+      color: white;
+      padding: 0.2rem 1rem;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+
+    .final-highlight {
+      background: #f5b041;
+      color: #0a2f1f;
+      font-size: 1.1rem;
+      padding: 1rem;
+      border-radius: 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    .final-highlight .teams {
+      font-size: 1.3rem;
+    }
+
+    /* جدول الترتيب */
+    .standing-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .standing-table th {
+      background: #0a2f1f;
+      color: white;
+      padding: 0.8rem;
+      font-weight: 500;
+    }
+
+    .standing-table td {
+      padding: 0.7rem;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .standing-table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .standing-table tr:hover {
+      background-color: #f0f0f0;
+    }
+
+    /* الفوتر */
+    .footer {
+      background: #0a2f1f;
+      color: #ccc;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+
+    .footer a {
+      color: #f5b041;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* متجاوب */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .hero-content h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- شريط التنقل -->
+  <nav class="navbar">
+    <div class="logo">
+      <i class="fas fa-futbol"></i>
+      <span>الملعب المصري</span>
+    </div>
+    <div class="nav-links">
+      <a href="#home">الرئيسية</a>
+      <a href="#news">الأخبار</a>
+      <a href="#matches">المباريات</a>
+      <a href="#standing">الترتيب</a>
+      <a href="#final">النهائي</a>
+    </div>
+    <div class="date-badge">
+      <i class="fas fa-calendar-alt"></i> رمضان 1446
+    </div>
+  </nav>
+
+  <!-- الهيدر الرئيسي -->
+  <header class="hero" id="home">
+    <div class="hero-content">
+      <h1>دوري المحافظات الرمضاني</h1>
+      <p>بطولة كل المحافظات المصرية .. النهائي ليلة العيد الأقصر × قنا</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- قسم الأخبار -->
+    <section id="news">
+      <div class="section-title">
+        <i class="fas fa-newspaper" style="color:#f5b041;"></i>
+        <h2>آخر الأخبار الرياضية</h2>
+      </div>
+      <div class="news-grid" id="news-container"></div>
+    </section>
+
+    <!-- قسم المباريات والنتائج -->
+    <section id="matches" class="matches-section">
+      <div class="section-title">
+        <i class="fas fa-calendar-check" style="color:#f5b041;"></i>
+        <h2>نتائج ومباريات الدوري</h2>
+      </div>
+
+      <!-- مباريات سابقة -->
+      <div class="match-day">
+        <h3><i class="fas fa-clock"></i> مباريات الأمس</h3>
+        <div id="previous-matches"></div>
+      </div>
+
+      <!-- النهائي المحدد -->
+      <div class="final-highlight" id="final">
+        <span class="teams">
+          <span class="team"><i class="fas fa-star"></i> الأقصر</span>
+          <span> - </span>
+          <span class="team"><i class="fas fa-star"></i> قنا</span>
+        </span>
+        <span>⚽ النهائي • ليلة عيد الفطر • 9:00 مساءً</span>
+        <span class="result">لم يلعب بعد</span>
+      </div>
+    </section>
+
+    <!-- جدول ترتيب الفرق -->
+    <section id="standing">
+      <div class="section-title">
+        <i class="fas fa-list-ol" style="color:#f5b041;"></i>
+        <h2>ترتيب فرق المحافظات</h2>
+      </div>
+      <table class="standing-table" id="standing-table">
+        <thead>
+          <tr><th>المركز</th><th>الفريق</th><th>لعب</th><th>فوز</th><th>تعادل</th><th>خسارة</th><th>نقاط</th></tr>
+        </thead>
+        <tbody id="standing-body"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <!-- الفوتر -->
+  <footer class="footer">
+    <p>© 2025 الملعب المصري – جميع الحقوق محفوظة لدوري المحافظات الرمضاني</p>
+    <p>تواصل معنا: <a href="#"><i class="fab fa-facebook"></i></a> | <a href="#"><i class="fab fa-twitter"></i></a> | <a href="#"><i class="fab fa-instagram"></i></a></p>
+    <p style="font-size:0.9rem; margin-top:1rem;">البطولة برعاية اتحاد الكرة المصري ووزارة الشباب والرياضة</p>
+  </footer>
+
+  <script>
+    // بيانات وهمية للموقع
+    (function() {
+      // أخبار وهمية
+      const newsData = [
+        { title: "الأقصر تتأهل للنهائي بعد فوز مثير على أسوان", date: "25 رمضان", img: "https://images.pexels.com/photos/3621104/pexels-photo-3621104.jpeg?auto=compress&cs=tinysrgb&w=600" },
+        { title: "قنا تخطف بطاقة العبور بالفوز على سوهاج بركلات الترجيح", date: "24 رمضان", img: "https://images.pexels.com/photos/47316/stadium-football-field-soccer-47316.jpeg?auto=compress&cs=tinysrgb&w=600" },
+        { title: "القاهرة تودع البطولة بعد خسارة قاسية من الأقصر", date: "23 رمضان", img: "https://images.pexels.com/photos/1591060/pexels-photo-1591060.jpeg?auto=compress&cs=tinysrgb&w=600" },
+        { title: "محافظ الإسكندرية يكرم لاعبي الفريق رغم الخروج", date: "22 رمضان", img: "https://images.pexels.com/photos/262524/pexels-photo-262524.jpeg?auto=compress&cs=tinysrgb&w=600" }
+      ];
+
+      // نتائج المباريات السابقة
+      const previousMatches = [
+        { team1: "القاهرة", team2: "الجيزة", score1: 2, score2: 1 },
+        { team1: "الإسكندرية", team2: "الدقهلية", score1: 0, score2: 0 },
+        { team1: "الأقصر", team2: "أسوان", score1: 3, score2: 2 },
+        { team1: "قنا", team2: "سوهاج", score1: 1, score2: 1, pen: "5-4" },
+        { team1: "الشرقية", team2: "الغربية", score1: 1, score2: 2 },
+        { team1: "المنيا", team2: "أسيوط", score1: 0, score2: 1 },
+        { team1: "البحيرة", team2: "كفر الشيخ", score1: 2, score2: 2 },
+        { team1: "بورسعيد", team2: "الإسماعيلية", score1: 1, score2: 0 }
+      ];
+
+      // ترتيب الفرق (النقاط وهمية)
+      const standings = [
+        { team: "الأقصر", played: 6, win: 5, draw: 1, loss: 0, pts: 16 },
+        { team: "قنا", played: 6, win: 4, draw: 2, loss: 0, pts: 14 },
+        { team: "أسوان", played: 6, win: 4, draw: 0, loss: 2, pts: 12 },
+        { team: "سوهاج", played: 6, win: 3, draw: 2, loss: 1, pts: 11 },
+        { team: "القاهرة", played: 6, win: 3, draw: 1, loss: 2, pts: 10 },
+        { team: "الجيزة", played: 6, win: 3, draw: 0, loss: 3, pts: 9 },
+        { team: "الإسكندرية", played: 6, win: 2, draw: 2, loss: 2, pts: 8 },
+        { team: "الدقهلية", played: 6, win: 2, draw: 1, loss: 3, pts: 7 },
+        { team: "الشرقية", played: 6, win: 2, draw: 0, loss: 4, pts: 6 },
+        { team: "الغربية", played: 6, win: 1, draw: 2, loss: 3, pts: 5 },
+        { team: "المنيا", played: 6, win: 1, draw: 1, loss: 4, pts: 4 },
+        { team: "أسيوط", played: 6, win: 1, draw: 1, loss: 4, pts: 4 }
+      ];
+
+      // عرض الأخبار
+      const newsContainer = document.getElementById('news-container');
+      newsData.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'news-card';
+        card.innerHTML = `
+          <div class="news-img" style="background-image: url('${item.img}');"></div>
+          <div class="news-content">
+            <h3>${item.title}</h3>
+            <div class="news-date">${item.date} | رمضان</div>
+          </div>
+        `;
+        newsContainer.appendChild(card);
+      });
+
+      // عرض المباريات السابقة
+      const prevMatchesDiv = document.getElementById('previous-matches');
+      previousMatches.forEach(m => {
+        const matchDiv = document.createElement('div');
+        matchDiv.className = 'match-item';
+        let resultText = `${m.score1} - ${m.score2}`;
+        if (m.pen) resultText += ` (ب.ت ${m.pen})`;
+        matchDiv.innerHTML = `
+          <div class="teams">
+            <span class="team"><i class="fas fa-shield-alt"></i> ${m.team1}</span>
+            <span> - </span>
+            <span class="team"><i class="fas fa-shield-alt"></i> ${m.team2}</span>
+          </div>
+          <span class="result">${resultText}</span>
+        `;
+        prevMatchesDiv.appendChild(matchDiv);
+      });
+
+      // عرض جدول الترتيب
+      const standingBody = document.getElementById('standing-body');
+      standings.sort((a,b) => b.pts - a.pts).forEach((team, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${index+1}</td>
+          <td><i class="fas fa-flag" style="color:#f5b041;"></i> ${team.team}</td>
+          <td>${team.played}</td>
+          <td>${team.win}</td>
+          <td>${team.draw}</td>
+          <td>${team.loss}</td>
+          <td><strong>${team.pts}</strong></td>
+        `;
+        standingBody.appendChild(row);
+      });
+    })();
+  </script>
+</body>
+</html>
